@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import firebase from '../firebase.js';
 import moment from 'moment';
 
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 import $ from 'jquery'; 
 
 var database = firebase.database();
@@ -15,18 +18,23 @@ class Chat extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: []
-     
+        data: [],
+        nickState: '',
+        msgState: ''
     };
+
  }
 
 
-componentDidMount() {
 
-    $('#join-chat-button').on("click", function(e) {
-        e.preventDefault();
+joinChat = (nicknameraw) => {
 
-        nickname = $('#nickname-text').val().trim();
+    console.log('click');
+
+        $('.backdrop').css('display', 'none');
+        $('.box').css('display', 'none');
+
+        nickname = nicknameraw.trim();
 
         let nickIsUnique = true;
         database.ref('users').once("value", function(users) {
@@ -41,14 +49,14 @@ componentDidMount() {
         if (nickIsUnique) {
 
             $('.nickname-card').css('display', 'none')
-        $('.chat-card').css('display', 'block')
+            $('.chat-card').css('display', 'block')
 
-        
-        nickcolor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-        
-        if (nickname === "") {
-            nickname = "Anonymous" + (Math.floor(Math.random() * 1000) + 1);
-        }
+            
+            nickcolor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            
+            if (nickname === "") {
+                nickname = "Anonymous" + (Math.floor(Math.random() * 1000) + 1);
+            }
 
             $('#message-text').select();
 
@@ -75,7 +83,7 @@ componentDidMount() {
         }
         });
 
-    });
+
     
     // on close
     window.addEventListener('beforeunload', function (e) {
@@ -138,67 +146,96 @@ componentDidMount() {
         }
     });
 
-    // send new message button
-    $('#message-button').on("click", function(e) {
-        e.preventDefault() 
+}
 
-        // push message object to chat node in database
-        database.ref('chat').push({
-        time: moment().format('HH:mm:ss'),
-        color: nickcolor,
-        nickname: nickname,
-        message: $('#message-text').val(),
-        type: `message`
-        });
+// send new message function
+sendMsg = (e) => { 
 
-        //update user's last activity
-        database.ref('users/' + myKey).update({
-            last: moment().format('HH:mm:ss')
-        })   
-
-        // set selection back to the message input field
-        $('#message-text').val('');
-        $('#message-text').select();
+    // push message object to chat node in database
+    database.ref('chat').push({
+    time: moment().format('HH:mm:ss'),
+    color: nickcolor,
+    nickname: nickname,
+    message: $('#message-text').val(),
+    type: `message`
     });
 
+    //update user's last activity
+    database.ref('users/' + myKey).update({
+        last: moment().format('HH:mm:ss')
+    })   
 
+    // set selection back to the message input field
+    $('#message-text').val('');
+    $('#message-text').select();
 }
+
+
+handleChange = (event) => {
+    this.setState({
+        nickState: event.target.value
+    })
+}
+
+handleSubmit = (event) => {
+    event.preventDefault();
+    this.joinChat(this.state.nickState);
+}
+
+keyPress = (e) => {
+    if(e.keyCode == 13){
+        this.joinChat(this.state.nickState);
+    }
+ }
+
+ handleChangeMsg = (event) => {
+    this.setState({
+        msgState: event.target.value
+    })
+}
+
+ keyPressMsg = (e) => {
+    if(e.keyCode == 13){
+        this.sendMsg(this.state.msgState);
+    }
+ }
 
   render() {
 
     return (
 
         <div>
-            <div>   
-                <div>
-                    <div className="card mb-4 nickname-card">
-                        <div className="card-header text-center">Choose a nickname</div>
-                        <div className="card-body text-center">
-                            <form>
-                                <input type="text" id="nickname-text" className="form-control form-control-sm" placeholder="Nickname"></input>
-                                <button className="btn btn-sm btn-dark" id="join-chat-button">Enter Lobby</button>
-                                <div className="login-display text-center"></div>
-                            </form>
-                    </div>
-                    </div>
+
+                <div className="backdrop">
+
                 </div>
-            </div>
+
+                <div className="box">
+                        {/* <form> */}
+                            <Form.Control size="sm text-center" type="text" placeholder="Enter a nickname" onKeyDown={this.keyPress} onChange={this.handleChange}/>
+                            <Button variant="secondary" style={{margin: 10 + 'px'}} onClick={this.handleSubmit}>
+                                    Enter Chat Lobby
+                            </Button>
+                        {/* </form> */}
+                </div>
+            
+
 
             <div className="stuck">
                 <div className="asd">
                     {/* className="card-body" */}
                     <div id="chat-text"></div>
                     
-                    <select id="users-list" class="select-style" size="10"></select>
+                    <select id="users-list" className="select-style" size="20"></select>
         
                 </div>
 
                 <div className="chat-input-div">
-                    <form>
-                        <input className="form-control form-control-sm" id="message-text" placeholder="Message" type="text"></input>
-                        <button className="btn btn-sm btn-dark" id="message-button">Send</button>
+                    {/* <form> */}
+                        <input onKeyDown={this.keyPressMsg} onChange={this.handleChangeMsg} className="form-control form-control-sm" id="message-text" placeholder="Message" type="text"></input>
+                        <button onClick={this.sendMsg} className="btn btn-sm btn-dark" id="message-button">Send</button>
                     
-                    </form>
+                    {/* </form> */}
                 </div>
             </div>
 

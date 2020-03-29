@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import SplitPane, { Pane } from 'react-split-pane';
+import SplitPane from 'react-split-pane';
 
 import axios from 'axios';
 import Articles from './components/Articles';
@@ -37,6 +37,13 @@ class App extends Component {
   });
 }
 
+moveUserList = (size) => {
+    let fish = document.getElementById('users-list');
+    fish.style.bottom = size - 200 + 'px';
+    fish.style.height = size;
+    fish.setAttribute('size', 50)
+    console.log(size);
+}
 
   render() {
 
@@ -44,13 +51,15 @@ class App extends Component {
     return (
       <div className="App">
 
-          {/* <SplitPane split="horizontal" minSize={0} maxSize={32} defaultSize={32}>
+          <SplitPane split="horizontal" minSize={0} maxSize={32} defaultSize={32}>
               
               <div style={{height: '100%', overflow: 'hidden'}}>
                   <h3 style={{paddingLeft: 20 + 'px'}}>Covid Makers</h3>
-              </div> */}
+              </div>
 
-              <SplitPane split="horizontal" size={300} primary="second">
+              <SplitPane split="horizontal" size={230} maxSize={500} minSize={88} primary="second"
+              onChange={size => this.moveUserList(size)}
+              >
                 
                       <SplitPane split="vertical" defaultSize={'10%'}>
                         <div style={{overflow: 'hidden'}}>
@@ -87,14 +96,12 @@ class App extends Component {
                        <SplitPane split="horizontal" defaultSize={'100%'}>
                               <div style={{width:'100%'}}>
                                   {/* <h5 style={{marginTop: 10, width: '100%'}}>Chats</h5> */}
-                                  <Chat />
+                                    <Chat />
                               </div>
                       </SplitPane> 
               </SplitPane>
-             
-             
 
-          {/* </SplitPane> */}
+          </SplitPane>
           
        
 

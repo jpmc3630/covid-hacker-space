@@ -325,20 +325,12 @@ color: black;
 
 
 
-#message-text {
-  margin-top: 15px;
-  width: 90%;
-  float: left;
-  display: inline;
-  position: relative;
-  bottom: 0px;
-}
 
-#send-button {
+/* #send-button {
   position: relative;
   top: -2px;
   display: inline;
-}
+} */
 
 #nickname-text {
 width: 400px;
@@ -349,10 +341,6 @@ left: 50%;
 transform: translate(-50%,-50%);
 }
 
-#rps-button {
-  display: inline;
-  position: relative;
-}
 
 #chat-text {
   /* position: absolute;
@@ -369,26 +357,42 @@ transform: translate(-50%,-50%);
   height: 100%;
   overflow-y: scroll;
   max-height: 500px;
+  bottom: 82px;
+  z-index: 20;
+  /* background-color: green; */
 }
 
 .chat-input-div {
-  position: relative;
-  top: -40px;
-  width: 84%;
-  
+  position: absolute;
+  bottom: 50px;
+  width: 75%;
+  /* background-color: blue; */
 }
 
-/* .asd {
-  height: 100%;
-} */
-
+#message-text {
+  margin-top: 15px;
+  width: 87%;
+  float: left;
+  display: inline;
+  position: relative;
+  bottom: 0px;
+  /* background-color: orange; */
+}
 .stuck {
   position: absolute;
   bottom: -33px;
   left:15px;
   width: 100%;
-  
-  
+  /* background-color:red; */
+  padding: 10px;
+}
+
+#message-button {
+  position: absolute;
+  bottom: 0px;
+  width: 20%;
+  right: -100px;
+
 }
 
 #users-list {
@@ -399,13 +403,13 @@ transform: translate(-50%,-50%);
   /* float: right; */
 
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  bottom: 40px;
+  right: 20px;
 
   
   position: absolute;
   
-  height: 200px;
+  height: 220px;
   
   
   min-height: 50px;
@@ -418,7 +422,6 @@ transform: translate(-50%,-50%);
   width: 120px;
   border-radius: 3px;
   overflow: hidden;
- 
 }
 
 .select-style select {
@@ -433,4 +436,28 @@ transform: translate(-50%,-50%);
 
 .select-style select:focus {
   outline: none;
+}
+
+
+
+
+
+.backdrop {
+  opacity: .6;
+  z-index: 5;
+  background: black;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.box {
+  width: 200px;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

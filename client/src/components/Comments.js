@@ -37,7 +37,6 @@ class Comments extends Component {
 
   render() {
 
-    const { dat } = this.props;
     return (
 
             <>

@@ -1,57 +1,103 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import SplitPane, { Pane } from 'react-split-pane';
 
+import axios from 'axios';
+import Articles from './components/Articles';
+import Comments from "./components/Comments";
+import Chat from "./components/Chat";
+
+
+
 class App extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      data: [],
+      artId: null,
+      commentsStatusText: `Click an article to view it's comments.`,
+      commentsData: []
+    };
+ }
+
+ loadComments = (id) => {
+   this.setState({artId: id})
+  console.log(id);
+  axios
+  .get(
+    `/comments/${id}`
+  )
+  .then(({ data }) => {
+      if (data.data.length < 1) {
+        this.setState({commentsStatusText: 'There are no comments for this article.', commentsData: []});
+      } else {
+          this.setState({commentsData: data.data});
+      };
+  });
+}
+
+
   render() {
+
+
     return (
       <div className="App">
-        {/* <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          
-        </div> */}
-          <SplitPane split="horizontal" defaultSize={'7%'}>
+
+          {/* <SplitPane split="horizontal" minSize={0} maxSize={32} defaultSize={32}>
+              
+              <div style={{height: '100%', overflow: 'hidden'}}>
                   <h3 style={{paddingLeft: 20 + 'px'}}>Covid Makers</h3>
-        
+              </div> */}
 
-
-              <SplitPane split="horizontal" defaultSize={'60%'}>
+              <SplitPane split="horizontal" size={300} primary="second">
                 
-                      <SplitPane split="vertical" defaultSize={'15%'}>
-                        <div>
-                            <h4>Categories</h4>
+                      <SplitPane split="vertical" defaultSize={'10%'}>
+                        <div style={{overflow: 'hidden'}}>
+                            <h5 style={{marginTop: 10}}>Categories</h5>
                         </div>
 
-                          <SplitPane split="vertical" defaultSize={'60%'}>
-                              <div>
-                                  <h4>Articles</h4>
+                          <SplitPane split="vertical" defaultSize={'70%'}>
+
+                              <div style={{height: '100%', overflowX: 'auto'}}>
+                                  <h5 style={{marginTop: 10}}>Articles</h5>
+                                  <Articles 
+                                      loadComments={this.loadComments} 
+                                      submitComment={this.submitComment} 
+                                  />
                               </div>
 
-                              <SplitPane split="vertical" defaultSize={'100%'}>
-                                      <h4>Comments</h4>
-
+                              <div>
+                                  <Comments            
+                                      comments={this.state.commentsData}
+                                      artId={this.state.artId} 
+                                      loadComments={this.loadComments}
                                       
-                              </SplitPane>
-
-
-                          </SplitPane>
-
+                                      bodyText={this.state.commentsBodyText}
+                                      statusText={this.state.commentsStatusText}
+                                  />
+                              </div>
 
                           
+
+                          </SplitPane>
+                         
                       </SplitPane>
-
-                    <SplitPane split="horizontal" defaultSize={'100%'}>
-                            
-                                <h4 className="h-center">Chats</h4>
-                            
                       
-                    </SplitPane>
-
+                       <SplitPane split="horizontal" defaultSize={'100%'}>
+                              <div style={{width:'100%'}}>
+                                  {/* <h5 style={{marginTop: 10, width: '100%'}}>Chats</h5> */}
+                                  <Chat />
+                              </div>
+                      </SplitPane> 
               </SplitPane>
+             
+             
 
-          </SplitPane>
+          {/* </SplitPane> */}
           
+       
+
       </div>
     );
   }

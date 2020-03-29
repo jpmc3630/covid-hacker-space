@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 10px;
@@ -77,4 +72,365 @@
 
 .h-center {
   width: 100%;
+}
+
+
+
+
+.container-fluid {
+  max-width: 98%;
+}
+
+.topRightShadowBlur
+{
+  padding: 20px; margin: 10px;
+  width:700px;height:200px;
+  border: solid 1px #555;
+  background-color: #eed;
+  box-shadow: 10px -10px 5px rgba(0,0,0,0.6);
+  -moz-box-shadow: 10px -10px 5px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 10px -10px 5px rgba(0,0,0,0.6);
+  -o-box-shadow: 10px -10px 5px rgba(0,0,0,0.6);
+}
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.link-button:hover,
+.link-button:focus {
+text-decoration: none;
+}
+
+.news-card {
+  height: 162px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+
+
+.news-image {
+  /* background-image: url(http://i.stack.imgur.com/r5CAq.jpg); */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #ccc;
+  border: 1px solid;
+  width: 20em;
+  height: 10em;
+  position: relative;
+  top: -20px;
+  left: -20px;
+  float:left;
+}
+
+.news-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 19px;
+  
+  overflow: hidden;
+  
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.news-byline {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  color: #999;
+  position: absolute;
+  top: 100px;
+  right: 0px;
+  /* margin-top:5px; */
+}
+
+.news-body {
+  font-family: 'Ubuntu', sans-serif;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  
+}
+
+.news-content {
+  position: relative;
+  margin-left: 320px;
+  
+}
+
+div.contain {
+  background-size: contain;
+}
+div.cover {
+  background-size: cover;
+}
+
+.comments-list {
+  /* background: yellow; */
+  margin-top: 10px;
+  position: absolute;
+  width: 100%;
+  /* height: 100%; */
+  bottom: 100px;
+  top: 0px;
+  min-height: 50px;
+  overflow-y: scroll;
+  word-wrap: break-word;
+}
+
+.comment-status-div {
+  margin-top:10px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit-comment {
+  position: absolute;
+  bottom: 0;
+  width: 99%;
+  /* margin: 6px; */
+  /* padding: 20px; */
+}
+
+.status-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.comment-card {
+  margin: 6px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.comment-author {
+font-weight: bold;
+position:relative;
+display: inline;
+float: left;
+}
+
+.comment-date {
+  color: #999;
+  float: right;
+  display: inline;
+}
+
+.comment-body {
+color: black;
+}
+
+.comment-name-text {
+  width: 100%;
+  border-width:1; 
+  height:20px;
+}
+
+.comment-body-text {
+  width: 100%;
+  border-width:1; 
+  margin-top:4px;
+  margin-bottom: 4px;
+}
+
+.comment-button {
+  width: 100%;
+}
+
+
+@media (max-width: 40em) {
+  .news-image {
+  display: none;
+  }
+  .news-content {
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+  .news-author {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .news-author {
+    display: none;
+  }
+
+}
+
+
+
+
+
+/* chat stuff */
+
+.jumbotron {
+  background-color: black; 
+  color: white;
+  height: 100px;
+}
+
+/* .chat-card {
+  display: none;
+  height: 100%;
+} */
+
+
+.game-card {
+  display: none;
+}
+
+.rps-card {
+  display: none;
+}
+
+#game-button {
+  float: right;
+  position: relative;
+  top: -3px;
+}
+
+#rps-quit-button {
+  float: right;
+  position: relative;
+  top: -3px;
+}
+
+#chat-text {
+  text-align: left;
+  height: 200px;
+  width: 84%;
+  /* max-height: 150px; */
+  overflow-y: scroll;
+  float: left;
+  position: relative;
+  bottom: 10px;
+}
+
+
+
+#message-text {
+  margin-top: 15px;
+  width: 90%;
+  float: left;
+  display: inline;
+  position: relative;
+  bottom: 0px;
+}
+
+#send-button {
+  position: relative;
+  top: -2px;
+  display: inline;
+}
+
+#nickname-text {
+width: 400px;
+display: inline;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+}
+
+#rps-button {
+  display: inline;
+  position: relative;
+}
+
+#chat-text {
+  /* position: absolute;
+  /* height: 100%; 
+  max-height: 250px;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto; */
+  position: relative;
+  bottom: 30px;
+  height: 100%;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.chat-input-div {
+  position: relative;
+  top: -40px;
+  width: 84%;
+  
+}
+
+/* .asd {
+  height: 100%;
+} */
+
+.stuck {
+  position: absolute;
+  bottom: -33px;
+  left:15px;
+  width: 100%;
+  
+  
+}
+
+#users-list {
+  
+  width: 15%;
+  overflow-y: scroll;
+  border-style: none;
+  /* float: right; */
+
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+
+  
+  position: absolute;
+  
+  height: 200px;
+  
+  
+  min-height: 50px;
+}
+
+
+
+.select-style {
+  border: 1px solid #ccc;
+  width: 120px;
+  border-radius: 3px;
+  overflow: hidden;
+ 
+}
+
+.select-style select {
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
 }

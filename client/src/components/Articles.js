@@ -37,7 +37,7 @@ class Articles extends Component {
       if (searchData.data.data.length < 1) this.setState({statusText: `No results found for '${criteria}'`}) ;
       this.setState({data: searchData.data.data});  
       } else {
-          this.setState({statusText: `Scraping ...`});
+          this.setState({statusText: `Loading ...`});
           this.getScrape(order);
       }
     };
@@ -68,8 +68,6 @@ class Articles extends Component {
 
 
 
-
-
   render() {
 
     const { data } = this.state;
@@ -92,7 +90,7 @@ class Articles extends Component {
                             selectedCard={this.state.selectedCard}
                         />
 
-                        ))}
+                    ))}
 
                 </div>
             </div>

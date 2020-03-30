@@ -133,10 +133,10 @@ text-decoration: none;
 
 .news-title {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 19px;
-  
+  font-size: 18px;
+  top: -2px;
   overflow: hidden;
-  
+  position: relative;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
@@ -155,11 +155,13 @@ text-decoration: none;
 
 .news-body {
   font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
   position: relative;
+  top: -10px;
   overflow: hidden;
   text-overflow: ellipsis; 
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-line-clamp: 3; /* number of lines to show */
   -webkit-box-orient: vertical;
   
 }
@@ -292,40 +294,6 @@ color: black;
 } */
 
 
-.game-card {
-  display: none;
-}
-
-.rps-card {
-  display: none;
-}
-
-#game-button {
-  float: right;
-  position: relative;
-  top: -3px;
-}
-
-#rps-quit-button {
-  float: right;
-  position: relative;
-  top: -3px;
-}
-
-#chat-text {
-  text-align: left;
-  height: 200px;
-  width: 84%;
-  /* max-height: 150px; */
-  overflow-y: scroll;
-  float: left;
-  position: relative;
-  bottom: 10px;
-}
-
-
-
-
 /* #send-button {
   position: relative;
   top: -2px;
@@ -339,6 +307,17 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%,-50%);
+}
+
+#chat-text {
+  text-align: left;
+  height: 200px;
+  width: 84%;
+  /* max-height: 150px; */
+  /* overflow-y: scroll; */
+  float: left;
+  position: relative;
+  bottom: 10px;
 }
 
 
@@ -358,7 +337,7 @@ transform: translate(-50%,-50%);
   overflow-y: scroll;
   max-height: 500px;
   bottom: 82px;
-  z-index: 20;
+  z-index: 3;
   /* background-color: green; */
 }
 
@@ -409,22 +388,25 @@ transform: translate(-50%,-50%);
   
   position: absolute;
   
-  height: 220px;
-  
-  
+  height: 218px;
+
   min-height: 50px;
 }
 
+#users-list:focus {
+  border-style: none !important;
+  box-shadow: none !important;
+  outline:none;
+}
 
-
-.select-style {
+/* .select-style {
   border: 1px solid #ccc;
   width: 120px;
   border-radius: 3px;
   overflow: hidden;
-}
+} */
 
-.select-style select {
+.select-style {
   padding: 5px 8px;
   width: 130%;
   border: none;
@@ -461,3 +443,79 @@ transform: translate(-50%,-50%);
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.sub-backdrop {
+  /* opacity: .6; */
+  z-index: 15;
+  background: black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  /* transform: scale(0); */
+  transition: .6s ease opacity;
+
+}
+
+
+.sub-box {
+  background-color: lightgray;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top:5px;
+  width: 60%;
+  height: auto;
+  z-index: 20;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  opacity: 0;
+  /* transform: scale(0); */
+  transition: .6s ease opacity;
+
+}
+
+
+
+.article-input-text {
+  font-size: 16px !important;
+}
+
+
+
+.submit-button {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  
+
+  background-color: transparent;
+  color:rgb(30, 135, 255);
+
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+.submit-button:hover{
+  text-decoration: underline;
+  color:rgb(9, 64, 126)
+}
+
+.submit-button:focus {
+text-decoration: none;
+border:none;
+outline:none;
+}
+
+
+/* 
+.react-tag-input {
+  font-size: 13px !important;
+} */

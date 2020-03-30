@@ -28,9 +28,8 @@ class Chat extends Component {
 
 
 joinChat = (nicknameraw) => {
-
-    console.log('click');
-
+        let chat = document.getElementById('chat-text');
+        chat.style.height = 170 + 'px';
         $('.backdrop').css('display', 'none');
         $('.box').css('display', 'none');
 
@@ -206,24 +205,19 @@ keyPress = (e) => {
 
         <div>
 
-                <div className="backdrop">
-
-                </div>
+                <div className="backdrop"></div>
 
                 <div className="box">
-                        {/* <form> */}
                             <Form.Control size="sm text-center" type="text" placeholder="Enter a nickname" onKeyDown={this.keyPress} onChange={this.handleChange}/>
                             <Button variant="secondary" style={{margin: 10 + 'px'}} onClick={this.handleSubmit}>
                                     Enter Chat Lobby
                             </Button>
-                        {/* </form> */}
                 </div>
             
 
-
             <div className="stuck">
                 <div className="asd">
-                    {/* className="card-body" */}
+
                     <div id="chat-text"></div>
                     
                     <select id="users-list" className="select-style" size="20"></select>
@@ -231,11 +225,8 @@ keyPress = (e) => {
                 </div>
 
                 <div className="chat-input-div">
-                    {/* <form> */}
                         <input onKeyDown={this.keyPressMsg} onChange={this.handleChangeMsg} className="form-control form-control-sm" id="message-text" placeholder="Message" type="text"></input>
                         <button onClick={this.sendMsg} className="btn btn-sm btn-dark" id="message-button">Send</button>
-                    
-                    {/* </form> */}
                 </div>
             </div>
 

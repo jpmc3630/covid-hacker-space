@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0-nizeq.mongodb.net/test?retryWrites=true&w=majority" , { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin:thisisthepass666@cluster0-kzdnv.mongodb.net/test?retryWrites=true&w=majority" , { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // Define API routes here
@@ -89,7 +89,54 @@ app.get('/search/:criteria/:order', async (req, res) => {
  
 });
 
+app.post("/submitarticle", async (req, res) => {
+  // Create a new comment in the comments collection
+try {
+  
+  console.log(req.body);
+if (!req.body.title) {
+  console.log('there is no title');
+  
+} else {
+  console.log('there is a title');
+  await db.headlines.create(req.body);
+  
+}
+  
+  // get all the news and sort it appropriately
+  // let news;
+  // if (req.params.order === "comments") {
+  //     news = await db.headlines.find({}).sort({commentsTally: -1});
+  // } else if (req.params.order==="oldest") {
+  //     news = await db.headlines.find({}).sort({date: 1});
+  // } else {
+    let articles = await db.headlines.find({}).sort({date: -1});
+  // }
+  res.json({ success: true, data: articles });
 
+  } catch (error) {
+    console.log("We have an error: " + error);
+  }
+
+
+
+  // db.comments.create(req.body)
+  //   .then(function(dbComment) {
+  //     console.log(dbComment);
+  //     // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
+  //     // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+  //     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+  //     return db.headlines.findOneAndUpdate({ _id: req.body.articleId }, { $push: { commentsIds: dbComment._id }, $inc: { commentsTally: 1 }  }, { new: true });
+  //   })
+  //   .then(function(dbHeadline) {
+  //     // If the User was updated successfully, send it back to the client
+  //     res.json(dbHeadline);
+  //   })
+  //   .catch(function(err) {
+  //     // If an error occurs, send it back to the client
+  //     res.json(err);
+  //   });
+});
 
 app.get('/scrape/:order', async (req, res) => {
   try {
@@ -109,6 +156,7 @@ app.get('/scrape/:order', async (req, res) => {
       let url = $(this).parent().attr('href');
       let date = $(this).find('.published-date').attr('data-published-date');
       let commentsTally = 0;
+
       let obj = {
         title,
         byline,
@@ -161,13 +209,16 @@ app.get('/scrape/:order', async (req, res) => {
     } else if (req.params.order==="oldest") {
         news = await db.headlines.find({}).sort({date: 1});
     } else {
-      news = await db.headlines.find({}).sort({date: -1});
+        news = await db.headlines.find({}).sort({date: -1});
     }
     res.json({ success: true, data: news });
   } catch (error) {
     console.log("We have an error: " + error);
   }
 });
+
+
+
 
 
 

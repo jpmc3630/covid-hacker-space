@@ -31,7 +31,6 @@ class Comments extends Component {
         this.props.loadComments(this.props.artId);
       //   props.incComFunc(props.arrIndex);
         this.setState({bodyText: ''});
-        
       };
     }
 
@@ -42,7 +41,7 @@ class Comments extends Component {
             <>
 
                 <div className="comments-list">
-                <h5>Comments</h5>
+                <h6 style={{marginTop: -1}}>Comments</h6>
                     {this.props.comments.length <= 0
                     ? <div className="comment-status-div">{this.props.statusText}</div>
                     : 
@@ -50,7 +49,7 @@ class Comments extends Component {
                     <div className="comment-card card bg-light" key={comment._id}>
                         <div><div className="comment-author">{comment.username}</div>
                         <div className="comment-date">{moment(comment.created_at).fromNow()}</div></div>
-                        <div className="comment-body">{comment.body}</div>
+                        <div className="comment-body text-left">{comment.body}</div>
                         
                     </div>
                     )

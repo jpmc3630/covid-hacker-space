@@ -6,7 +6,7 @@ import axios from 'axios';
 import Articles from './components/Articles';
 import Comments from "./components/Comments";
 import Chat from "./components/Chat";
-
+import Submission from "./components/Submission";
 
 
 class App extends Component {
@@ -17,13 +17,25 @@ class App extends Component {
       data: [],
       artId: null,
       commentsStatusText: `Click an article to view it's comments.`,
-      commentsData: []
+      commentsData: [],
+      subShow: false
     };
  }
 
+ componentDidMount() {
+  
+ }
+
+ showSubModal = () => {
+   this.setState({subShow: true});
+ }
+
+ hideSubModal = () => {
+  this.setState({subShow: false});
+}
+
  loadComments = (id) => {
    this.setState({artId: id})
-  console.log(id);
   axios
   .get(
     `/comments/${id}`
@@ -37,24 +49,30 @@ class App extends Component {
   });
 }
 
+
 moveUserList = (size) => {
-    let fish = document.getElementById('users-list');
-    fish.style.bottom = size - 200 + 'px';
-    fish.style.height = size;
-    fish.setAttribute('size', 50)
-    console.log(size);
+    let list = document.getElementById('users-list');
+    let chat = document.getElementById('chat-text');
+    chat.style.height = size - 63 + 'px';
+    list.style.height = size - 13 + 'px';
 }
 
   render() {
 
 
     return (
-      <div className="App">
 
-          <SplitPane split="horizontal" minSize={0} maxSize={32} defaultSize={32}>
+     
+
+      <div className="App"> 
+      {this.state.subShow &&  <Submission hideModal={this.hideSubModal}/>}
+         
+          <SplitPane split="horizontal" minSize={32} maxSize={32} defaultSize={32}>
               
               <div style={{height: '100%', overflow: 'hidden'}}>
-                  <h3 style={{paddingLeft: 20 + 'px'}}>Covid Makers</h3>
+                  <h3 style={{float: 'left', paddingLeft: 20 + 'px'}}>Covid Makers</h3>
+                  <button className="submit-button" 
+                    onClick={this.showSubModal}>Submit Article</button>
               </div>
 
               <SplitPane split="horizontal" size={230} maxSize={500} minSize={88} primary="second"
@@ -63,13 +81,13 @@ moveUserList = (size) => {
                 
                       <SplitPane split="vertical" defaultSize={'10%'}>
                         <div style={{overflow: 'hidden'}}>
-                            <h5 style={{marginTop: 10}}>Categories</h5>
+                            <h6 style={{marginTop: 10}}>Categories</h6>
                         </div>
 
                           <SplitPane split="vertical" defaultSize={'70%'}>
 
                               <div style={{height: '100%', overflowX: 'auto'}}>
-                                  <h5 style={{marginTop: 10}}>Articles</h5>
+                                  <h6 style={{marginTop: 10}}>Articles</h6>
                                   <Articles 
                                       loadComments={this.loadComments} 
                                       submitComment={this.submitComment} 
@@ -77,17 +95,15 @@ moveUserList = (size) => {
                               </div>
 
                               <div>
+                                  
                                   <Comments            
                                       comments={this.state.commentsData}
                                       artId={this.state.artId} 
                                       loadComments={this.loadComments}
-                                      
                                       bodyText={this.state.commentsBodyText}
                                       statusText={this.state.commentsStatusText}
                                   />
                               </div>
-
-                          
 
                           </SplitPane>
                          
@@ -95,7 +111,7 @@ moveUserList = (size) => {
                       
                        <SplitPane split="horizontal" defaultSize={'100%'}>
                               <div style={{width:'100%'}}>
-                                  {/* <h5 style={{marginTop: 10, width: '100%'}}>Chats</h5> */}
+                                  {/* <h6 style={{marginTop: 10, width: '100%'}}>Chats</h6> */}
                                     <Chat />
                               </div>
                       </SplitPane> 

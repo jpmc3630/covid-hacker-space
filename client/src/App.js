@@ -32,6 +32,7 @@ class App extends Component {
 
  hideSubModal = () => {
   this.setState({subShow: false});
+  this.clickChild();
 }
 
  loadComments = (id) => {
@@ -53,7 +54,7 @@ class App extends Component {
 moveUserList = (size) => {
     let list = document.getElementById('users-list');
     let chat = document.getElementById('chat-text');
-    chat.style.height = size - 63 + 'px';
+    chat.style.height = size - 65 + 'px';
     list.style.height = size - 13 + 'px';
 }
 
@@ -67,31 +68,32 @@ moveUserList = (size) => {
       <div className="App"> 
       {this.state.subShow &&  <Submission hideModal={this.hideSubModal}/>}
          
-          <SplitPane split="horizontal" minSize={32} maxSize={32} defaultSize={32}>
+          <SplitPane split="horizontal" minSize={52} maxSize={52} defaultSize={52}>
               
-              <div style={{height: '100%', overflow: 'hidden'}}>
-                  <h3 style={{float: 'left', paddingLeft: 20 + 'px'}}>Covid Makers</h3>
-                  <button className="submit-button" 
-                    onClick={this.showSubModal}>Submit Article</button>
+              <div style={{paddingTop: '10px', height: '100%', overflow: 'hidden'}}>
+                  <h3 style={{float: 'left', paddingLeft: 20 + 'px'}}>Covid Hacker Space</h3><h6 style={{float: 'left', paddingLeft: 10 + 'px', paddingTop: 14 + 'px', fontSize: 12 + 'px'}}>Billions of tiny factories.</h6>
+                  <button className="submit-button" onClick={this.showSubModal}>Submit Article</button>
               </div>
 
               <SplitPane split="horizontal" size={230} maxSize={500} minSize={88} primary="second"
               onChange={size => this.moveUserList(size)}
               >
                 
-                      <SplitPane split="vertical" defaultSize={'10%'}>
+                      {/* <SplitPane split="vertical" defaultSize={'10%'}>
                         <div style={{overflow: 'hidden'}}>
                             <h6 style={{marginTop: 10}}>Categories</h6>
-                        </div>
+                        </div> */}
 
                           <SplitPane split="vertical" defaultSize={'70%'}>
 
                               <div style={{height: '100%', overflowX: 'auto'}}>
-                                  <h6 style={{marginTop: 10}}>Articles</h6>
+                                  {/* <h6 style={{marginTop: 10}}>Articles</h6> */}
                                   <Articles 
                                       loadComments={this.loadComments} 
                                       submitComment={this.submitComment} 
+                                      setClick={click => this.clickChild = click}
                                   />
+
                               </div>
 
                               <div>
@@ -107,7 +109,7 @@ moveUserList = (size) => {
 
                           </SplitPane>
                          
-                      </SplitPane>
+                      {/* </SplitPane> */}
                       
                        <SplitPane split="horizontal" defaultSize={'100%'}>
                               <div style={{width:'100%'}}>

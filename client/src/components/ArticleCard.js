@@ -25,8 +25,9 @@ class ArticleCard extends Component {
               <div className="news-content">
                   <p className="news-title">{dat.title}</p>
                   <p className="news-body">{dat.body}</p>
+                  <p className="news-tags">Tags: {dat.tags.join(' ')}</p>
                   <span className="news-byline"><span className="news-author">{dat.byline}&nbsp;&nbsp; &nbsp;&nbsp; 
-                    {moment(dat.date).format('LL')}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    {moment(dat.date).format('LLL')}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     {dat.url === '' 
                     ? 
                     <span>No URL</span> 

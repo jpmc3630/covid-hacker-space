@@ -41,7 +41,10 @@ class Comments extends Component {
             <>
 
                 <div className="comments-list">
-                <h6 style={{marginTop: -1}}>Comments</h6>
+                
+                    <div style={{marginTop: '-15px'}} className="navbar-brand">
+                        Comments
+                    </div>
                     {this.props.comments.length <= 0
                     ? <div className="comment-status-div">{this.props.statusText}</div>
                     : 
@@ -50,7 +53,6 @@ class Comments extends Component {
                         <div><div className="comment-author">{comment.username}</div>
                         <div className="comment-date">{moment(comment.created_at).fromNow()}</div></div>
                         <div className="comment-body text-left">{comment.body}</div>
-                        
                     </div>
                     )
                     }
@@ -62,21 +64,21 @@ class Comments extends Component {
                         type="text"
                         onChange={(e) => this.setState({usernameText: e.target.value})}
                         placeholder="Name"
-                        className="comment-name-text"
+                        className="comment-name-text form-control form-control-sm mb-4"
                         maxLength="30"
                     />
                     <input
                         type="text"
                         onChange={(e) => this.setState({bodyText: e.target.value})}
                         placeholder="Comment..."
-                        className="comment-body-text"
+                        className="comment-body-text form-control form-control-sm mb-4"
                         wrap="hard"
                         cols={40}
                         rows={10}
                         value= {this.props.bodyText}
                         ref={this.inputRef}
                     />
-                    <Button className="comment-button" variant="secondary" size="sm" onClick={this.submitComment}>
+                    <Button className="comment-button" variant="primary" size="sm" onClick={this.submitComment}>
                         Submit Comment
                     </Button>
                 </div>

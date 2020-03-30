@@ -16,9 +16,9 @@ function Navbar(props) {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <div className="navbar-brand">
-        Scrape Space
+        Articles
       </div>
       <button
         className="navbar-toggler"
@@ -78,14 +78,16 @@ function Navbar(props) {
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0">
+        {/* <input class="form-control form-control-sm mb-4" type="text" placeholder="Small input"> */}
+
           <input
-            className="form-control mr-sm-2"
+            className="search-input form-control form-control-sm mb-4"
             type="search"
             placeholder="Search Filter"
             aria-label="Search"
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button className="btn btn-outline-success my-2 my-sm-0" onClick={(e) => {
+          <button className="btn btn-sm btn-outline-success my-2 my-sm-0" onClick={(e) => {
               passSearch(e); 
               if (searchText === '') {
                 props.updateSearch('noSearch');

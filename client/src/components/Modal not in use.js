@@ -16,7 +16,7 @@ const useFocus = () => {
 
 function CommentsModal(props) {
     
-    const [statusText, setStatusText] = useState('Loading comments....');
+    const [statusText, setStatusText] = useState('Loading comments...');
     const [comments, setComments] = useState([]);
     const [intervalIsSet, setIntervalIsSet] = useState(false);
     const [show, setShow] = useState(false);

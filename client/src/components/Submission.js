@@ -20,17 +20,15 @@ class Submission extends Component {
         data: [],
         datPreview: {
             _id: '',
-            date: moment().format('LL'),
-
+            date: moment().format('LLL'),
             title: '', 
             body: '', 
             byline: '', 
             url: '', 
-            img: ''
+            img: '',
+            tags: []
         },
-        itemTags: [],
-        skillsTags: [],
-        materialsTags: []
+        
     };
 
  }
@@ -57,6 +55,12 @@ componentWillUnmount () {
     })
 }
 
+updateTags = (newTags) => {
+    let fish = this.state.datPreview;
+    fish.tags = newTags;
+    this.setState({datPreview: fish})
+}
+
 handleSubmit = (event) => {
     event.preventDefault();
     // this.submitArticle(this.state.nickState);
@@ -81,10 +85,8 @@ submitArticle = async () => {
         img: this.state.datPreview.img,
         body: this.state.datPreview.body,
         url: this.state.datPreview.url,
-        date: this.state.datPreview.date
-        // itemTags: [],
-        // skillsTags: [],
-        // materialsTags: []
+        date: this.state.datPreview.date,
+        tags: this.state.datPreview.tags
       }
 
     // if (this.state.usernameText && this.state.bodyText) {
@@ -147,22 +149,6 @@ keyPress = (e) => {
  }
 
 
-//    var ctr = 1;
-//   hint.className = hint.className !== 'show' ? 'show' : 'hide';
-//   if (hint.className === 'show') {
-    // hint.style.display = 'block';
-    // window.setTimeout(function(){
-    //   hint.style.opacity = 1;
-    //   hint.style.transform = 'scale(1)';
-    // },0);
-//   }
-//   if (hint.className === 'hide') {
-//     hint.style.opacity = 0;
-//     hint.style.transform = 'scale(0)';
-//     window.setTimeout(function(){
-//       hint.style.display = 'none';
-//     },700); // timed to match animation-duration
-//   }
 
   render() {
 
@@ -180,18 +166,18 @@ keyPress = (e) => {
                     <Form.Control className="article-input-text" size="sm text-left" name="url" type="url" required placeholder="Article URL" onKeyDown={this.keyPress} onChange={this.handleChange}/>
                     <Form.Control className="article-input-text" size="sm text-left" name="img" type="url" required placeholder="Link to Image" onKeyDown={this.keyPress} onChange={this.handleChange}/>
                     <Form.Control className="article-input-text" size="sm text-left" name="byline" type="text" maxLength="30" placeholder="Submitted by" onKeyDown={this.keyPress} onChange={this.handleChange}/>
-                    <h6 style={{margin: 10}}>Please be specific as tags will help maker's find your article</h6>
+                    <h6 style={{margin: 10}}>Keyword tags may include the item name, equipment, materials, skills required, etc.</h6>
                     <div className=".input-tag-wrapper">
                     <ReactTagInput
-                        tags={this.state.itemTags} 
-                        placeholder="Tags describing Item/Product to Manufacture"
-                        maxTags={10}
+                        tags={this.state.datPreview.tags} 
+                        placeholder="Keyword Tags"
+                        maxTags={100}
                         editable={true}
                         readOnly={false}
                         removeOnBackspace={true}
-                        onChange={(newTags) => this.setState({itemTags: newTags})}
+                        onChange={(newTags) => this.updateTags(newTags)}
                     />
-
+{/* 
                     <ReactTagInput 
                         tags={this.state.skillsTags} 
                         placeholder="Tags describing Skills and Equipment Required"
@@ -211,7 +197,7 @@ keyPress = (e) => {
                         removeOnBackspace={true}
                         onChange={(newTags) => this.setState({materialsTags: newTags})}
                         
-                    />
+                    /> */}
                     </div>
                     <h6 style={{margin: 10}}>Once you are happy with the preview below you can submit</h6>
                     <ArticleCard

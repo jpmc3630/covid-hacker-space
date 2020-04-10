@@ -6,6 +6,9 @@ Billions of tiny factories exist around the world. Let's share manufacturing inf
 View it live here: <https://covid-hacker-space.herokuapp.com>
 Or demo video here: <https://youtu.be/vP25AQ7QgOQ>
 
+![Screenshot](https://github.com/jpmc3630/covid-hacker-space/blob/master/readme/screenshot1.png "Screenshot")
+![Screenshot](https://github.com/jpmc3630/covid-hacker-space/blob/master/readme/screenshot2.png "Screenshot")
+
 ## Inspiration
 A friend asked me if I knew where I could get hydrogen peroxide so he could make hand sanitiser. Another friend told me about an article he saw in a woodworker magazine about building a DIY iron lung (it was from the 1950s polio era). This got me thinking. Out of all this amazing technology we have at our fingertips. Ie. 3d printers etc. Surely we can build a couple hundred thousand ventilators right?
 
